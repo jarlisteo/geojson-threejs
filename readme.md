@@ -1,12 +1,14 @@
-#Libreria que convierte un archivo GeoJSON a una visualizacion de ThreeJS
+# Libreria que convierte un archivo GeoJSON a una visualizacion de ThreeJS
 
-# Comandos de la libreria:
+## Comandos de la libreria:
 
--npm install -> instala dependencias
--npm vite -> corre vite en modo dev para previsualizar la libreria
--npm vite build -> hace un build de la libreria en /dist
+- npm install -> instala dependencias
+- npm vite -> corre vite en modo dev para previsualizar la libreria
+- npm vite build -> hace un build de la libreria en /dist
 
-## El build es una libreria javascript que contiene todo lo necesario para montarlo en cualquier lugar
+## Build
+
+El build es una libreria javascript que contiene todo lo necesario para montarlo en cualquier lugar
 
 El uso es muy sencillo se muestra a continuacion
 
