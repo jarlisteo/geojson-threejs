@@ -17,3 +17,7 @@ El uso es muy sencillo se muestra a continuacion
 ```
 
 Esto crea en el body un visualizador threejs para mostrar el GEOJSON del id, en el ejemplo se usa ID = 0 que es el geojson de prueba.
+
+## Ejemplo
+
+![Screenshot](screenshot.png)
