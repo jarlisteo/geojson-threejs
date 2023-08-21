@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
-import exampleGeojson from "./example.json" assert { type: "json" };
+import exampleGeojson from "./example1.json" assert { type: "json" };
 
 var scene, camera, renderer, controls;
 var selectedId = 0;
@@ -11,13 +11,19 @@ const pointer = new THREE.Vector2();
 const colors = ["#00a5e3", "#8dd7bf", "#6c88c4", "#ffa23a", "#ffd872", "#ff3d18", "#ff6446", "#ff8b74"];
 
 export default class LatbitGeojson {
-  constructor(id) {
+  constructor(id, endpoint = "http://108.181.190.199/test/get_unidades.php?id=") {
     this.id = id;
     this.geojson = exampleGeojson;
+    this.endpoint = endpoint;
     if (id != 0) {
-      this.geojson = obtenerGeoJSON(id);
+      this.geojson = obtenerGeoJSON(endpoint, id).then((json) => {
+        this.geojson = json;
+        console.log(this.geojson);
+        this.render();
+      });
+    } else {
+      this.render();
     }
-    return this.render();
   }
 
   render() {
@@ -159,16 +165,14 @@ export default class LatbitGeojson {
   }
 }
 
-function obtenerGeoJSON(ID) {
-  const xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4 && xhr.status === 200) {
-      const geojson = JSON.parse(xhr.responseText);
-      return geojson;
-    }
-  };
-  xhr.open("GET", "php/get_unidades.php?id=" + ID, true);
-  xhr.send();
+async function obtenerGeoJSON(endpoint, ID) {
+  try {
+    let res = await fetch(endpoint + ID);
+    let json = await res.json();
+    return json;
+  } catch (error) {
+    console.log("Error al obtener el GeoJSON desde el endpoint, verifique que el endpoint sea correcto");
+  }
 }
 
 function animate() {
