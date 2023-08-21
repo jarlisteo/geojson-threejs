@@ -15,15 +15,16 @@ export default class LatbitGeojson {
     this.id = id;
     this.geojson = exampleGeojson;
     this.endpoint = endpoint;
+
     if (id != 0) {
       this.geojson = obtenerGeoJSON(endpoint, id).then((json) => {
         this.geojson = json;
-        console.log(this.geojson);
         this.render();
       });
-    } else {
-      this.render();
+      return;
     }
+
+    return this.render();
   }
 
   render() {
